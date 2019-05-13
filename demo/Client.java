@@ -89,7 +89,7 @@ public class Client {
 
         DatagramSocket datagramSocket = new DatagramSocket();
         KCP kcp = new KCP(1000) {
-
+        kcp.NoDelay(1, 10, 2, 1);
 
             @Override
             protected void output(byte[] bytes, int size) {
@@ -163,7 +163,6 @@ public class Client {
 
         }).start();
         while(true) {
-        kcp.NoDelay(1, 10, 2, 1);
         kcp.Send(DATA1.getBytes(StandardCharsets.UTF_8));
         kcp.flush();
         Thread.sleep(10);
